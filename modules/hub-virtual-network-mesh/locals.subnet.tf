@@ -17,6 +17,7 @@ locals {
       delegation                                    = null
       route_table                                   = null
       default_outbound_access_enabled               = v.firewall.management_subnet_default_outbound_access_enabled
+      ignore_route_table_changes                    = false
     }
     if v.firewall != null && try(v.firewall.management_ip_enabled, true)
   }
@@ -42,6 +43,7 @@ locals {
       delegation                                    = null
       route_table                                   = { id = v.firewall.subnet_route_table_id != null ? v.firewall.subnet_route_table_id : local.firewall_route_table_ids[k] }
       default_outbound_access_enabled               = v.firewall.subnet_default_outbound_access_enabled
+      ignore_route_table_changes                    = false
     } if v.firewall != null
   }
   subnets = merge(local.user_subnets, local.firewall_subnets, local.firewall_management_subnets)
@@ -68,6 +70,7 @@ locals {
           )
         ) : (try(subnet.route_table.id, null) == null ? null : { id = subnet.route_table.id })
         default_outbound_access_enabled = subnet.default_outbound_access_enabled
+        ignore_route_table_changes      = subnet.ignore_route_table_changes
       }]
     ]]) : subnet.composite_key => subnet
   }

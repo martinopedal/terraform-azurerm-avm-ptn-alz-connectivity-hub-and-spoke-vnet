@@ -37,6 +37,7 @@ module "hub_virtual_network_subnets" {
   private_link_service_network_policies_enabled = each.value.private_link_service_network_policies_enabled
   retry                                         = var.retry
   route_table                                   = each.value.route_table
+  ignore_route_table_changes                    = each.value.ignore_route_table_changes
   service_endpoint_policies                     = each.value.service_endpoint_policies
   service_endpoints_with_location               = each.value.service_endpoints_with_location
   timeouts                                      = var.timeouts
