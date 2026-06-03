@@ -30,6 +30,7 @@ module "hub_virtual_network_subnets" {
   address_prefixes                              = each.value.address_prefixes
   default_outbound_access_enabled               = each.value.default_outbound_access_enabled
   delegation                                    = each.value.delegation
+  ignore_route_table_changes                    = each.value.ignore_route_table_changes
   name                                          = each.value.name
   nat_gateway                                   = each.value.nat_gateway
   network_security_group                        = each.value.network_security_group
@@ -37,7 +38,6 @@ module "hub_virtual_network_subnets" {
   private_link_service_network_policies_enabled = each.value.private_link_service_network_policies_enabled
   retry                                         = var.retry
   route_table                                   = each.value.route_table
-  ignore_route_table_changes                    = each.value.ignore_route_table_changes
   service_endpoint_policies                     = each.value.service_endpoint_policies
   service_endpoints_with_location               = each.value.service_endpoints_with_location
   timeouts                                      = var.timeouts
